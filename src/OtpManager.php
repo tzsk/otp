@@ -7,41 +7,41 @@ class OtpManager
     /**
      * Otp expiry limit - Default: 10 min.
      *
-     * @var integer
+     * @var int
      */
     protected $expiry = 600;
 
     /**
-     * Otp digits - Default: 4
+     * Otp digits - Default: 4.
      *
-     * @var integer
+     * @var int
      */
     protected $digits = 4;
 
     /**
-     * @var integer
+     * @var int
      */
     protected $time;
 
     /**
-     * Alias methods for generate
+     * Alias methods for generate.
      *
      * @var array
      */
     protected $aliasgenerate = ['make', 'create'];
 
     /**
-     * Alias methods for check
+     * Alias methods for check.
      *
      * @var array
      */
     protected $aliasCheck = ['verify', 'match'];
 
     /**
-     * OtpFactory Constructor
+     * OtpFactory Constructor.
      *
-     * @param integer $digits
-     * @param integer $expiry
+     * @param int $digits
+     * @param int $expiry
      */
     public function __construct($digits = null, $expiry = null)
     {
@@ -56,7 +56,7 @@ class OtpManager
     }
 
     /**
-     * @param integer $expiry
+     * @param int $expiry
      * @return self
      */
     public function expiry($expiry)
@@ -71,7 +71,7 @@ class OtpManager
     }
 
     /**
-     * @param integer $digits
+     * @param int $digits
      * @return self
      */
     public function digits($digits)
@@ -97,7 +97,7 @@ class OtpManager
     /**
      * @param string $code
      * @param string $secret
-     * @return boolean
+     * @return bool
      */
     public function check($code, $secret)
     {
@@ -107,12 +107,12 @@ class OtpManager
 
         $factor = ($this->time - floor($this->expiry / 2)) / $this->expiry;
 
-        return ($code == $this->calculate($secret, $factor));
+        return $code == $this->calculate($secret, $factor);
     }
 
     /**
      * @param string $secret
-     * @param double $factor
+     * @param float $factor
      * @return string
      */
     protected function calculate($secret, $factor = null)
@@ -134,7 +134,7 @@ class OtpManager
     }
 
     /**
-     * @param double|null $divisionFactor
+     * @param float|null $divisionFactor
      * @return string
      */
     protected function timeFactor($divisionFactor)

@@ -14,7 +14,7 @@ class TestCase extends OrchestraTestCase
     protected function getPackageAliases($app)
     {
         return [
-            'Otp' => 'Tzsk\Otp\Facade\Otp'
+            'Otp' => 'Tzsk\Otp\Facade\Otp',
         ];
     }
 }
