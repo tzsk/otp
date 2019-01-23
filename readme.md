@@ -160,7 +160,7 @@ If you discover any security related issues, please email author email instead o
 
 ## Credits
 
-- [author name][link-author]
+- [Kazi Mainuddin Ahmed][link-author]
 - [All Contributors][link-contributors]
 
 ## License
