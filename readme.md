@@ -1,9 +1,11 @@
 # Laravel OTP
 
+[![Software License][ico-license]][link-license]
 [![Latest Version on Packagist][ico-version]][link-packagist]
 [![Total Downloads][ico-downloads]][link-downloads]
 [![Build Status][ico-travis]][link-travis]
 [![StyleCI][ico-styleci]][link-styleci]
+[![Quality Score][ico-quality]][link-quality]
 
 This is tool to create OTP with an expiry for PHP without using any Database. This is primaryly a Laravel Package but it can be used outside of Laravel also.
 
@@ -167,14 +169,19 @@ If you discover any security related issues, please email author email instead o
 
 license. Please see the [license file](license.md) for more information.
 
+[ico-license]: https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square
 [ico-version]: https://img.shields.io/packagist/v/tzsk/otp.svg?style=flat-square
 [ico-downloads]: https://img.shields.io/packagist/dt/tzsk/otp.svg?style=flat-square
 [ico-travis]: https://img.shields.io/travis/tzsk/otp/master.svg?style=flat-square
 [ico-styleci]: https://styleci.io/repos/167214907/shield
+[ico-quality]: https://img.shields.io/scrutinizer/g/tzsk/otp.svg?style=flat-square
 
+[link-license]: license.md
 [link-packagist]: https://packagist.org/packages/tzsk/otp
 [link-downloads]: https://packagist.org/packages/tzsk/otp
 [link-travis]: https://travis-ci.org/tzsk/otp
 [link-styleci]: https://styleci.io/repos/167214907
+[link-quality]: https://scrutinizer-ci.com/g/tzsk/otp
+
 [link-author]: https://github.com/tzsk
 [link-contributors]: ../../contributors
