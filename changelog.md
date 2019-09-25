@@ -2,7 +2,8 @@
 
 All notable changes to `otp` will be documented in this file.
 
-## Version 1.0
+## Version 2.0
 
 ### Added
+- Laravel 6 Support
 - Everything
