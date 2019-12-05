@@ -2,8 +2,8 @@
 
 namespace Tzsk\Otp\Providers;
 
-use Tzsk\Otp\OtpManager;
 use Illuminate\Support\ServiceProvider;
+use Tzsk\Otp\OtpManager;
 
 class OtpServiceProvider extends ServiceProvider
 {
