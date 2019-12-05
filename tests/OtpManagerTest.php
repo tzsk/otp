@@ -2,8 +2,8 @@
 
 namespace Tzsk\Otp\Tests;
 
-use Tzsk\Otp\OtpManager;
 use Tzsk\Otp\Facades\Otp;
+use Tzsk\Otp\OtpManager;
 
 class OtpManagerTest extends TestCase
 {
