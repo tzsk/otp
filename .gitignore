@@ -51,3 +51,4 @@ Temporary Items
 
 # Vendor directory
 vendor/
+.phpunit.result.cache
