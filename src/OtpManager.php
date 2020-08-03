@@ -2,8 +2,25 @@
 
 namespace Tzsk\Otp;
 
+use DateInterval;
+use Exception;
+use Tzsk\Otp\Contracts\KeyStorable;
+
+/**
+ * Class OtpManager.
+ *
+ * @method string make(string $key)
+ * @method string create(string $key)
+ * @method bool match(string $otp, string $key)
+ * @method bool verify(string $otp, string $key)
+ */
 class OtpManager
 {
+    /**
+     * @var KeyStorable
+     */
+    protected $store;
+
     /**
      * Otp expiry limit - Default: 10 min.
      *
@@ -28,7 +45,7 @@ class OtpManager
      *
      * @var array
      */
-    protected $aliasgenerate = ['make', 'create'];
+    protected $aliasGenerate = ['make', 'create'];
 
     /**
      * Alias methods for check.
@@ -40,19 +57,12 @@ class OtpManager
     /**
      * OtpFactory Constructor.
      *
-     * @param int $digits
-     * @param int $expiry
+     * @param KeyStorable $store
      */
-    public function __construct($digits = null, $expiry = null)
+    public function __construct(KeyStorable $store)
     {
         $this->time = time();
-        if ($digits) {
-            $this->digits($digits);
-        }
-
-        if ($expiry) {
-            $this->expiry($expiry);
-        }
+        $this->store = $store;
     }
 
     /**
@@ -86,21 +96,30 @@ class OtpManager
     }
 
     /**
-     * @param string $secret
+     * @param string $key
      * @return string
      */
-    public function generate($secret)
+    public function generate($key)
     {
+        $secret = sha1(uniqid());
+        $ttl = DateInterval::createFromDateString("{$this->time} seconds");
+        $this->store->put($this->keyFor($key), $secret, $ttl);
+
         return $this->calculate($secret);
     }
 
     /**
      * @param string $code
-     * @param string $secret
+     * @param string $key
      * @return bool
      */
-    public function check($code, $secret)
+    public function check($code, $key)
     {
+        $secret = $this->store->get($this->keyFor($key));
+        if (empty($secret)) {
+            return false;
+        }
+
         if ($code == $this->calculate($secret)) {
             return true;
         }
@@ -111,8 +130,26 @@ class OtpManager
     }
 
     /**
+     * @param string $key
+     * @return bool
+     */
+    public function forget($key)
+    {
+        return $this->store->forget($this->keyFor($key));
+    }
+
+    /**
+     * @param string $key
+     * @return string
+     */
+    protected function keyFor($key)
+    {
+        return md5(sprintf('%s-%s', 'tzsk-otp', $key));
+    }
+
+    /**
      * @param string $secret
-     * @param float $factor
+     * @param float|null $factor
      * @return string
      */
     protected function calculate($secret, $factor = null)
@@ -158,10 +195,11 @@ class OtpManager
      * @param string $method
      * @param array $args
      * @return mixed
+     * @throws Exception
      */
     public function __call($method, $args)
     {
-        if (in_array($method, $this->aliasgenerate)) {
+        if (in_array($method, $this->aliasGenerate)) {
             return $this->generate($args[0]);
         }
 
@@ -169,6 +207,6 @@ class OtpManager
             return $this->check($args[0], $args[1]);
         }
 
-        throw new \Exception('Method does not exist');
+        throw new Exception('Method does not exist');
     }
 }
