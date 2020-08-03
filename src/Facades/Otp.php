@@ -6,8 +6,7 @@ use Illuminate\Support\Facades\Facade;
 use Tzsk\Otp\OtpManager;
 
 /**
- * Class Otp
- * @package Tzsk\Otp\Facades
+ * Class Otp.
  *
  * @method static OtpManager digits(int $digits)
  * @method static OtpManager expiry(string $key)

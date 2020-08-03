@@ -7,8 +7,7 @@ use Exception;
 use Tzsk\Otp\Contracts\KeyStorable;
 
 /**
- * Class OtpManager
- * @package Tzsk\Otp
+ * Class OtpManager.
  *
  * @method string make(string $key)
  * @method string create(string $key)
@@ -18,7 +17,7 @@ use Tzsk\Otp\Contracts\KeyStorable;
 class OtpManager
 {
     /**
-     * @var KeyStorable $store
+     * @var KeyStorable
      */
     protected $store;
 

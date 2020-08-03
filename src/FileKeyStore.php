@@ -11,7 +11,7 @@ use Tzsk\Otp\Contracts\KeyStorable;
 class FileKeyStore implements KeyStorable
 {
     /**
-     * @var Repository $store
+     * @var Repository
      */
     protected $store;
 
