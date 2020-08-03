@@ -23,7 +23,10 @@
     "autoload": {
         "psr-4": {
             "Tzsk\\Otp\\": "src/"
-        }
+        },
+        "files": [
+            "src/helper.php"
+        ]
     },
     "autoload-dev": {
         "psr-4": {

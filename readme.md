@@ -57,7 +57,7 @@ $otp = Otp::generate($unique_secret);
 
 The above generated OTP will only be validated using the same unique secret within the default expiry time.
 
-> **TIP:** Otp is generally used for user verification. So the easiest way of determining the `uniqe secret` is the user's email or phone number. Or maybe even the User ID. You can even get creative about the unique secret. You can use `md5($email)` the md5 of user's email or phone number.
+> **TIP:** OTP is generally used for user verification. So the easiest way of determining the `uniqe secret` is the user's email or phone number. Or maybe even the User ID. You can even get creative about the unique secret. You can use `md5($email)` the md5 of user's email or phone number.
 
 **Match an OTP:**
 
@@ -104,6 +104,14 @@ Here, in the above example for matching the OTP we can see that the same config 
 
 **Security Advantage:** - The main advantage of using the same config while matching is some third person cannot use this tool to generate the same otp for the user in question if he doesn't know the config.
 
+### Helper usage
+
+You can use the package with provided helper function as well
+```php
+$otp = otp()->make($secret);
+$otp = otp()->digits(8)->expiry(20)->make($secret);
+```
+
 ## Usage outside Laravel.
 
 Install the package with composer the same way as above. Then just new up the `OtpManager` class.
@@ -113,15 +121,35 @@ Install the package with composer the same way as above. Then just new up the `O
 ```php
 // Use the calss path.
 use Tzsk\Otp\OtpManager;
+use Tzsk\Otp\FileKeyStore;
 
-$manager = new OtpManager(); // Default digits: 4, expiry: 10 min
 /**
- * Optional Parameters - 
- * $digits -> ingeger
- * $expiry -> integer in minutes
- * 
- * new OtpManager(6, 20); // 6 digit, 20 min validity.
+ * Now you need to have a directory in your filesystem where the package can do it's magic
+ * Create the FileKeyStore instance with the directory you've created for this
  */
+
+// Let's assume the directory you have created is `./otp-tmp`
+
+$directory = './otp-tmp';
+$store = new FileKeyStore($directory);
+$manager = new OtpManager($store);
+
+// You can even inline all the above step
+$manager = new OtpManager(new FileKeyStore('./otp-tmp'));
+
+// If you want you can use the otp helper as well
+$manager = otp('./otp-tmp');
+
+/**
+ * Required parameter of type Tzks\Otp\Contracts\KeyStorable
+ * 
+ * Default properties - 
+ * $digits -> 4
+ * $expiry -> 10 min
+ */
+
+$manager->digits(6); // To change the number of OTP digits
+$manager->expiry(20); // To change the mins until expiry
 
 $manager->generate($unique_secret); // Will return a string of OTP
 
@@ -129,6 +157,8 @@ $manager->match($otp, $unique_secret); // Will return true or false.
 ```
 
 All of the functionalities are the same as it is been documented in Laravel Usage section. Here just use the instance instead of the Static Facade.
+
+**NOTE:** You don't need to do anything if you are using Laravel. It will detect the default cache store of laravel.
 
 Example:
 

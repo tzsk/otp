@@ -52,3 +52,4 @@ Temporary Items
 # Vendor directory
 vendor/
 .phpunit.result.cache
+tests/phpunit-cache

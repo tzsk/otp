@@ -3,6 +3,7 @@
 namespace Tzsk\Otp\Providers;
 
 use Illuminate\Support\ServiceProvider;
+use Tzsk\Otp\CacheKeyStore;
 use Tzsk\Otp\OtpManager;
 
 class OtpServiceProvider extends ServiceProvider
@@ -34,7 +35,7 @@ class OtpServiceProvider extends ServiceProvider
             $digits = config('otp.digits');
             $expiry = config('otp.expiry');
 
-            return new OtpManager($digits, $expiry);
+            return (new OtpManager(new CacheKeyStore()))->digits($digits)->expiry($expiry);
         });
     }
 
