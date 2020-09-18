@@ -1,6 +1,11 @@
 # Changelog
 
-All notable changes to `otp` will be documented in this file.
+All notable changes to `otp` will be documented in this file
+
+## Version 5.0
+- Added support for Laravel 8
+- New Github Workflows
+- Dropped support for older Laravel Versions
 
 ## Version 4.0
 

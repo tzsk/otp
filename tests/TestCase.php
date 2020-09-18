@@ -2,19 +2,30 @@
 
 namespace Tzsk\Otp\Tests;
 
-use Orchestra\Testbench\TestCase as OrchestraTestCase;
+use Orchestra\Testbench\TestCase as Orchestra;
+use Tzsk\Otp\OtpServiceProvider;
 
-class TestCase extends OrchestraTestCase
+class TestCase extends Orchestra
 {
-    protected function getPackageProviders($app)
+    public function setUp(): void
     {
-        return ['Tzsk\Otp\Providers\OtpServiceProvider'];
+        parent::setUp();
     }
 
-    protected function getPackageAliases($app)
+    protected function getPackageProviders($app)
     {
         return [
-            'Otp' => 'Tzsk\Otp\Facade\Otp',
+            OtpServiceProvider::class,
         ];
+    }
+
+    public function getEnvironmentSetUp($app)
+    {
+        $app['config']->set('database.default', 'sqlite');
+        $app['config']->set('database.connections.sqlite', [
+            'driver' => 'sqlite',
+            'database' => ':memory:',
+            'prefix' => '',
+        ]);
     }
 }

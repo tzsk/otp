@@ -3,10 +3,8 @@
 namespace Tzsk\Otp\Tests;
 
 use Tzsk\Otp\Facades\Otp;
-use Tzsk\Otp\FileKeyStore;
-use Tzsk\Otp\OtpManager;
 
-class OtpManagerTest extends TestCase
+class OtpTest extends TestCase
 {
     public function test_it_has_digits_expiry()
     {
@@ -103,29 +101,5 @@ class OtpManagerTest extends TestCase
         $manager->setTime(time() + ($manager->getExpiry() * 100));
 
         $this->assertFalse($manager->check($otp, 'foo'));
-    }
-}
-
-class MockOtp extends OtpManager
-{
-    public function __construct()
-    {
-        $store = new FileKeyStore('./tests/phpunit-cache');
-        parent::__construct($store);
-    }
-
-    public function getExpiry()
-    {
-        return $this->expiry;
-    }
-
-    public function getDigits()
-    {
-        return $this->digits;
-    }
-
-    public function setTime($time)
-    {
-        $this->time = $time;
     }
 }
