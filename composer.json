@@ -1,0 +1,69 @@
+{
+    "name": "tzsk/otp",
+    "description": "OTP Generator :package_description Verifier without database",
+    "keywords": [
+        "tzsk",
+        "otp",
+        "php otp",
+        "laravel otp",
+        "otp generator",
+        "otp verification"
+    ],
+    "homepage": "https://github.com/tzsk/otp",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "tzsk",
+            "email": "mailtokmahmed@gmail.com",
+            "homepage": "https://github.com/tzsk",
+            "role": "Developer"
+        }
+    ],
+    "require": {
+        "php": "^7.4",
+        "illuminate/cache": "^7.0|^8.0",
+        "illuminate/console": "^7.0|^8.0",
+        "illuminate/filesystem": "^7.0|^8.0",
+        "illuminate/support": "^7.0|^8.0"
+    },
+    "require-dev": {
+        "friendsofphp/php-cs-fixer": "^2.16",
+        "orchestra/testbench": "^6.0",
+        "phpunit/phpunit": "^9.3",
+        "vimeo/psalm": "^3.11"
+    },
+    "autoload": {
+        "psr-4": {
+            "Tzsk\\Otp\\": "src"
+        },
+        "files": [
+            "src/Helper.php"
+        ]
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Tzsk\\Otp\\Tests\\": "tests"
+        }
+    },
+    "scripts": {
+        "psalm": "vendor/bin/psalm",
+        "test": "vendor/bin/phpunit --colors=always",
+        "test-coverage": "vendor/bin/phpunit --coverage-html coverage",
+        "format": "vendor/bin/php-cs-fixer fix --allow-risky=yes"
+    },
+    "config": {
+        "sort-packages": true
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Tzsk\\Otp\\OtpServiceProvider"
+            ],
+            "aliases": {
+                "Otp": "Tzsk\\Otp\\Facades\\Otp"
+            }
+        }
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
+}
