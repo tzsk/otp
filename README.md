@@ -8,7 +8,7 @@
 [![Total Downloads](https://img.shields.io/packagist/dt/tzsk/otp.svg?style=for-the-badge&logo=laravel)](https://packagist.org/packages/tzsk/otp)
 
 
-This is tool to create OTP with an expiry for PHP without using any Database. This is primaryly a Laravel Package but it can be used outside of Laravel also.
+This is a tool to create OTP with an expiry for PHP without using any Database. This is primarily a Laravel Package but it can be used outside of Laravel also.
 
 ## :package: Installation
 
@@ -18,7 +18,7 @@ Via Composer
 composer require tzsk/otp
 ```
 
-To publish the config file you can run
+To publish the config file for laravel you can run
 
 ```bash
 php artisan otp:publish
@@ -65,7 +65,7 @@ Otp::make($unique_secret);
 Otp::create($unique_secret);
 ```
 
-Make sure to set the same config during checking. What that means is, if you have used 8 digits and 30 min during creation you will also have to use 8 digits and 30 min during checking as well. It will match in same runtime if you don't set the same config but if you want to check later in a different runtime then it will fail.
+Make sure to set the same config during checking. What that means is, if you have used 8 digits and 30 min during creation you will also have to use 8 digits and 30 min during checking as well.
 
 ```php
 // Match - (Different Runtime)
