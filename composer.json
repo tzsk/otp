@@ -1,6 +1,6 @@
 {
     "name": "tzsk/otp",
-    "description": "OTP Generator :package_description Verifier without database",
+    "description": "OTP Generator and Verifier without database",
     "keywords": [
         "tzsk",
         "otp",
@@ -20,10 +20,7 @@
         }
     ],
     "require": {
-        "php": "^7.4",
-        "illuminate/cache": "^7.0|^8.0",
-        "illuminate/console": "^7.0|^8.0",
-        "illuminate/filesystem": "^7.0|^8.0",
+        "php": "^7.4|^8.0",
         "illuminate/support": "^7.0|^8.0"
     },
     "require-dev": {
