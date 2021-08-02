@@ -98,7 +98,7 @@ class OtpTest extends TestCase
     {
         $manager = new MockOtp();
         $otp = $manager->generate('foo');
-        $manager->setTime(time() + ($manager->getExpiry() * 100));
+        $manager->setTestTime(time() + ($manager->getExpiry() * 100));
 
         $this->assertFalse($manager->check($otp, 'foo'));
     }

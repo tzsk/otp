@@ -15,13 +15,14 @@ class Otp
 
     protected int $digits = 4;
 
-    protected int $time;
-
     public function __construct(Repository $store)
     {
-        $this->time = time();
-
         $this->store = $store;
+    }
+
+    protected function getFreshTime(): int
+    {
+        return time();
     }
 
     public function expiry($expiry): self
@@ -49,7 +50,7 @@ class Otp
     public function generate($key): string
     {
         $secret = sha1(uniqid());
-        $ttl = DateInterval::createFromDateString("{$this->time} seconds");
+        $ttl = DateInterval::createFromDateString("{$this->getFreshTime()} seconds");
         $this->store->put($this->keyFor($key), $secret, $ttl);
 
         return $this->calculate($secret);
@@ -66,7 +67,7 @@ class Otp
             return true;
         }
 
-        $factor = ($this->time - floor($this->expiry / 2)) / $this->expiry;
+        $factor = ($this->getFreshTime() - floor($this->expiry / 2)) / $this->expiry;
 
         return $code == $this->calculate($secret, $factor);
     }
@@ -100,7 +101,7 @@ class Otp
 
     protected function timeFactor($divisionFactor): string
     {
-        $factor = $divisionFactor ? floor($divisionFactor) : floor($this->time / $this->expiry);
+        $factor = $divisionFactor ? floor($divisionFactor) : floor($this->getFreshTime() / $this->expiry);
 
         $text = [];
         for ($i = 7; $i >= 0; $i--) {
