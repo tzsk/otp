@@ -36,7 +36,7 @@ class MockOtp extends Otp
 
     protected function getFreshTime(): int
     {
-        if($this->testTime) {
+        if ($this->testTime) {
             return $this->testTime;
         }
 
