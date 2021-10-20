@@ -9,6 +9,8 @@ use Tzsk\Otp\Otp;
 
 class MockOtp extends Otp
 {
+    protected ?int $testTime = null;
+
     public function __construct()
     {
         $directory = './tests/phpunit-cache';
@@ -27,8 +29,17 @@ class MockOtp extends Otp
         return $this->digits;
     }
 
-    public function setTime($time)
+    public function setTestTime($time)
     {
-        $this->time = $time;
+        $this->testTime = $time;
+    }
+
+    protected function getFreshTime(): int
+    {
+        if ($this->testTime) {
+            return $this->testTime;
+        }
+
+        return parent::getFreshTime();
     }
 }
