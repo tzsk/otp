@@ -3,7 +3,6 @@
 use Illuminate\Cache\FileStore;
 use Illuminate\Cache\Repository;
 use Illuminate\Filesystem\Filesystem;
-use Illuminate\Support\Facades\Cache;
 use Tzsk\Otp\Otp;
 
 if (! function_exists('otp')) {
