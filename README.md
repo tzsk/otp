@@ -21,7 +21,7 @@ composer require tzsk/otp
 To publish the config file for laravel you can run
 
 ```bash
-php artisan otp:publish
+php artisan vendor:publish --tag=otp-config
 ```
 
 ## :fire: Usage in Laravel
