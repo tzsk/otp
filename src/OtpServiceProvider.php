@@ -4,7 +4,6 @@ namespace Tzsk\Otp;
 
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\ServiceProvider;
-use Tzsk\Otp\Commands\OtpPublishCommand;
 
 class OtpServiceProvider extends ServiceProvider
 {
