@@ -9,10 +9,10 @@ use Tzsk\Otp\Otp;
 if (! function_exists('otp')) {
 
     /**
-     * @param string $directory
+     * @param string|null $directory
      * @return Otp
      */
-    function otp($directory = null)
+    function otp(string $directory = null): Otp
     {
         if ($directory) {
             $store = new Repository(new FileStore(new Filesystem(), $directory));
@@ -20,8 +20,6 @@ if (! function_exists('otp')) {
             return new Otp($store);
         }
 
-        ['digits' => $digits, 'expiry' => $expiry] = config('otp');
-
-        return (new Otp(Cache::store()))->digits($digits)->expiry($expiry);
+        return app('tzsk-otp');
     }
 }
