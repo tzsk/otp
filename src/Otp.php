@@ -50,7 +50,8 @@ class Otp
     public function generate($key): string
     {
         $secret = sha1(uniqid());
-        $ttl = DateInterval::createFromDateString("{$this->getFreshTime()} seconds");
+        $expiry = $this->expiry;
+        $ttl = DateInterval::createFromDateString("{$expiry} seconds");
         $this->store->put($this->keyFor($key), $secret, $ttl);
 
         return $this->calculate($secret);

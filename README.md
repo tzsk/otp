@@ -4,9 +4,8 @@
 
 ![GitHub License](https://img.shields.io/github/license/tzsk/otp?style=for-the-badge)
 [![Latest Version on Packagist](https://img.shields.io/packagist/v/tzsk/otp.svg?style=for-the-badge&logo=composer)](https://packagist.org/packages/tzsk/otp)
-[![GitHub Tests Action Status](https://img.shields.io/github/workflow/status/tzsk/otp/Tests?label=tests&style=for-the-badge&logo=github)](https://github.com/tzsk/otp/actions?query=workflow%3ATests+branch%3Amaster)
+[![GitHub Tests Action Status](https://img.shields.io/github/actions/workflow/status/tzsk/otp/run-tests.yml?branch=master&label=tests&style=for-the-badge&logo=github)](https://github.com/tzsk/otp/actions?query=workflow%3ATests+branch%3Amaster)
 [![Total Downloads](https://img.shields.io/packagist/dt/tzsk/otp.svg?style=for-the-badge&logo=laravel)](https://packagist.org/packages/tzsk/otp)
-
 
 This is a tool to create OTP with an expiry for PHP without using any Database. This is primarily a Laravel Package but it can be used outside of Laravel also.
 
@@ -27,6 +26,7 @@ php artisan otp:publish
 ## :fire: Usage in Laravel
 
 Import the facade class:
+
 ```php
 use Tzsk\Otp\Facades\Otp;
 ```
@@ -90,6 +90,7 @@ Here, in the above example for matching the OTP we can see that the same config 
 ### :ocean: Helper usage
 
 You can use the package with provided helper function as well
+
 ```php
 $otp = otp()->make($secret);
 $otp = otp()->digits(8)->expiry(20)->make($secret);
@@ -110,7 +111,7 @@ Install the package with composer the same way as above. Then just use it with t
 $manager = otp('./otp-tmp');
 
 /**
- * Default properties - 
+ * Default properties -
  * $digits -> 4
  * $expiry -> 10 min
  */
@@ -141,7 +142,7 @@ Also, keep in mind that while matching the OTP keep the digit & expiry config sa
 
 ## :microscope: Testing
 
-``` bash
+```bash
 composer test
 ```
 
@@ -159,8 +160,8 @@ Please review [our security policy](../../security/policy) on how to report secu
 
 ## :crown: Credits
 
-- [Kazi Ahmed](https://github.com/tzsk)
-- [All Contributors](../../contributors)
+-   [Kazi Ahmed](https://github.com/tzsk)
+-   [All Contributors](../../contributors)
 
 ## :policeman: License
 
