@@ -12,6 +12,6 @@ class OtpPublishCommand extends Command
 
     public function handle()
     {
-        $this->call('vendor:publish', ['--tag' => "otp-config"]);
+        $this->call('vendor:publish', ['--tag' => 'otp-config']);
     }
 }

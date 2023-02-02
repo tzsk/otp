@@ -7,7 +7,7 @@ use Tzsk\Otp\Otp;
 
 if (! function_exists('otp')) {
     /**
-     * @param string|null $directory
+     * @param  string|null  $directory
      * @return Otp
      */
     function otp(string $directory = null): Otp

@@ -12,7 +12,7 @@ class OtpServiceProvider extends ServiceProvider
     {
         if ($this->app->runningInConsole()) {
             $this->publishes([
-                __DIR__ . '/../config/otp.php' => config_path('otp.php'),
+                __DIR__.'/../config/otp.php' => config_path('otp.php'),
             ], 'otp-config');
 
             $this->commands([
@@ -29,6 +29,6 @@ class OtpServiceProvider extends ServiceProvider
 
     public function register()
     {
-        $this->mergeConfigFrom(__DIR__ . '/../config/otp.php', 'otp');
+        $this->mergeConfigFrom(__DIR__.'/../config/otp.php', 'otp');
     }
 }
