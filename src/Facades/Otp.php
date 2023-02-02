@@ -10,9 +10,9 @@ use Illuminate\Support\Facades\Facade;
  * @method static string make(string $key)
  * @method static string create(string $key)
  * @method static string generate(string $key)
- * @method static boolean match(mixed $otp, string $key)
- * @method static boolean check(mixed $otp, string $key)
- * @method static boolean verify(mixed $otp, string $key)
+ * @method static bool match(mixed $otp, string $key)
+ * @method static bool check(mixed $otp, string $key)
+ * @method static bool verify(mixed $otp, string $key)
  *
  * @see \Tzsk\Otp\Otp
  */
