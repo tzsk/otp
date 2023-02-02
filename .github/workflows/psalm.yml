@@ -3,8 +3,8 @@ name: Psalm
 on: [push, pull_request]
 
 jobs:
-  psalm:
-    name: psalm
+  Psalm:
+    name: Psalm
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
