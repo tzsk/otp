@@ -7,7 +7,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
 
       - name: Setup PHP
         uses: shivammathur/setup-php@v2
@@ -27,11 +27,10 @@ jobs:
       - name: Run Pint
         run: ./vendor/bin/pint
 
-      - name: Commit changes back
-        run: |
-          git config user.name github-actions
-          git config user.email github-actions@github.com
-          git pull
-          git add .
-          git diff --staged --quiet || git commit -m "Apply Pint Changes"
-          git push
+      - uses: stefanzweifel/git-auto-commit-action@v2.1.0
+        with:
+          commit_message: Apply Pint fixes
+          branch: ${{ github.head_ref }}
+          commit_user_name: tzsk
+          commit_user_email: mailtokmahmed@gmail.com
+          commit_author: tzsk <mailtokmahmed@gmail.com>
