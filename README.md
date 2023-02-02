@@ -4,7 +4,7 @@
 
 ![GitHub License](https://img.shields.io/github/license/tzsk/otp?style=for-the-badge)
 [![Latest Version on Packagist](https://img.shields.io/packagist/v/tzsk/otp.svg?style=for-the-badge&logo=composer)](https://packagist.org/packages/tzsk/otp)
-[![GitHub Tests Action Status](https://img.shields.io/github/actions/workflow/status/tzsk/otp/run-tests.yml?branch=master&label=tests&style=for-the-badge&logo=github)](https://github.com/tzsk/otp/actions?query=workflow%3ATests+branch%3Amaster)
+[![GitHub Tests Action Status](https://img.shields.io/github/actions/workflow/status/tzsk/otp/tests.yml?branch=master&label=tests&style=for-the-badge&logo=github)](https://github.com/tzsk/otp/actions?query=workflow%3ATests+branch%3Amaster)
 [![Total Downloads](https://img.shields.io/packagist/dt/tzsk/otp.svg?style=for-the-badge&logo=laravel)](https://packagist.org/packages/tzsk/otp)
 
 This is a tool to create OTP with an expiry for PHP without using any Database. This is primarily a Laravel Package but it can be used outside of Laravel also.

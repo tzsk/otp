@@ -86,14 +86,14 @@ class Otp
     protected function calculate($secret, $factor = null): string
     {
         $hash = hash_hmac('sha1', $this->timeFactor($factor), $secret, true);
-        $offset = ord($hash[strlen($hash) - 1]) & 0xf;
+        $offset = ord($hash[strlen($hash) - 1]) & 0xF;
 
         $hash = str_split($hash);
         foreach ($hash as $index => $value) {
             $hash[$index] = ord($value);
         }
 
-        $binary = (($hash[$offset] & 0x7f) << 24) | (($hash[$offset + 1] & 0xff) << 16) | (($hash[$offset + 2] & 0xff) << 8) | ($hash[$offset + 3] & 0xff);
+        $binary = (($hash[$offset] & 0x7F) << 24) | (($hash[$offset + 1] & 0xFF) << 16) | (($hash[$offset + 2] & 0xFF) << 8) | ($hash[$offset + 3] & 0xFF);
 
         $otp = $binary % pow(10, $this->digits);
 
@@ -106,7 +106,7 @@ class Otp
 
         $text = [];
         for ($i = 7; $i >= 0; $i--) {
-            $text[] = ($factor & 0xff);
+            $text[] = ($factor & 0xFF);
             $factor >>= 8;
         }
         $text = array_reverse($text);
