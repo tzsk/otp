@@ -7,6 +7,12 @@ use DateInterval;
 use Exception;
 use Illuminate\Contracts\Cache\Repository;
 
+/**
+ * @method string make(string $key)
+ * @method string create(string $key)
+ * @method bool match(mixed $otp, string $key)
+ * @method bool check(mixed $otp, string $key)
+ */
 class Otp
 {
     protected Repository $store;
