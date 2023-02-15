@@ -27,10 +27,8 @@ jobs:
       - name: Run Pint
         run: ./vendor/bin/pint
 
-      - uses: stefanzweifel/git-auto-commit-action@v2.1.0
+      - name: Commit changes
+        uses: stefanzweifel/git-auto-commit-action@v4
         with:
-          commit_message: Apply Pint fixes
-          branch: ${{ github.head_ref }}
-          commit_user_name: tzsk
-          commit_user_email: mailtokmahmed@gmail.com
-          commit_author: tzsk <mailtokmahmed@gmail.com>
+          commit_message: Apply Pint Fixes
+          commit_author: Kazi Ahmed <mailtokmahmed@gmail.com>
