@@ -6,10 +6,7 @@ use Illuminate\Filesystem\Filesystem;
 use Tzsk\Otp\Otp;
 
 if (! function_exists('otp')) {
-    /**
-     * @param  string|null  $directory
-     * @return Otp
-     */
+
     function otp(string $directory = null): Otp
     {
         if ($directory) {
