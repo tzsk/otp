@@ -1,10 +1,12 @@
-name: Check & fix styling
+name: Pint
 
-on: [push]
+on: [push, pull_request]
 
 jobs:
   Pint:
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
 
     steps:
       - uses: actions/checkout@v3
@@ -31,4 +33,6 @@ jobs:
         uses: stefanzweifel/git-auto-commit-action@v4
         with:
           commit_message: Apply Pint Fixes
+          commit_user_name: tzsk
+          commit_user_email: mailtokmahmed@gmail.com
           commit_author: Kazi Ahmed <mailtokmahmed@gmail.com>
