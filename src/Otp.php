@@ -86,7 +86,7 @@ class Otp
 
     protected function keyFor($key): string
     {
-        return md5(sprintf('%s-%s', "tzsk-otp", $key));
+        return md5(sprintf('%s-%s', 'tzsk-otp', $key));
     }
 
     protected function calculate($secret, $factor = null): string
