@@ -120,7 +120,7 @@ class Otp
             $text[$index] = chr((int) $value);
         }
 
-        return  implode('', $text);
+        return implode('', $text);
     }
 
     protected function alias($key): ?Closure
