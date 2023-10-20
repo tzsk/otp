@@ -1,6 +1,6 @@
 # :gift: OTP Generator & Verifier
 
-![OTP](resources/otp.jpn)
+![OTP](resources/otp.jpg)
 
 ![GitHub License](https://img.shields.io/github/license/tzsk/otp?style=for-the-badge)
 [![Latest Version on Packagist](https://img.shields.io/packagist/v/tzsk/otp.svg?style=for-the-badge&logo=composer)](https://packagist.org/packages/tzsk/otp)
