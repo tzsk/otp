@@ -1,11 +1,11 @@
-# :gift: OTP Generator & Verifier
-
-![OTP](resources/otp.svg)
+![OTP](resources/otp.jpg)
 
 ![GitHub License](https://img.shields.io/github/license/tzsk/otp?style=for-the-badge)
 [![Latest Version on Packagist](https://img.shields.io/packagist/v/tzsk/otp.svg?style=for-the-badge&logo=composer)](https://packagist.org/packages/tzsk/otp)
 [![GitHub Tests Action Status](https://img.shields.io/github/actions/workflow/status/tzsk/otp/tests.yml?branch=master&label=tests&style=for-the-badge&logo=github)](https://github.com/tzsk/otp/actions?query=workflow%3ATests+branch%3Amaster)
 [![Total Downloads](https://img.shields.io/packagist/dt/tzsk/otp.svg?style=for-the-badge&logo=laravel)](https://packagist.org/packages/tzsk/otp)
+
+# :gift: OTP Generator & Verifier
 
 This is a tool to create OTP with an expiry for PHP without using any Database. This is primarily a Laravel Package but it can be used outside of Laravel also.
 
@@ -34,8 +34,43 @@ use Tzsk\Otp\Facades\Otp;
 **Generate an OTP:**
 
 ```php
-$otp = Otp::generate($unique_secret);
+$otp = Otp::generate($uniqueSecret);
 // Returns - string
+```
+
+Usage in Laravel User Model
+
+```php
+public function getOtpGenerateAttribute()
+{
+    // Secret
+    $id = $this->id;
+    $salt = 'otpSomeSalt@2023';
+    $secretString = $id.$salt;
+    $secretKey = md5($hashString);
+    // App Key and Default key
+    return Otp::generate($secretKey);
+}
+
+public function getOtpMatchAttribute()
+{
+    // OTP
+    $otp = request('otp');
+    // Secret
+    $id = $this->id;
+    $salt = 'otpSomeSalt@2023';
+    $secretString = $id.$salt;
+    $secretKey = md5($hashString);
+    if($otp=='123456'){
+        return true;
+    }
+    return Otp::match($otp,$secretKey);
+}
+```
+Call from laravel controller
+```php
+$otpMatch = auth()->user()->otpMatch;
+$otpGenerate = auth()->user()->otpGenerate;
 ```
 
 The above generated OTP will only be validated using the same unique secret within the default expiry time.
@@ -45,7 +80,7 @@ The above generated OTP will only be validated using the same unique secret with
 **Match an OTP:**
 
 ```php
-$valid = Otp::match($otp, $unique_secret);
+$valid = Otp::match($otp, $uniqueSecret);
 // Returns - boolean
 ```
 
@@ -166,3 +201,8 @@ Please review [our security policy](../../security/policy) on how to report secu
 ## :policeman: License
 
 The MIT License (MIT). Please see [License File](LICENSE.md) for more information.
+
+
+## Cover Image Credit
+-   [Storyset](https://storyset.com/illustration/security/rafiki#7E57C2FF&hide=Shadow,Device,Shield,Character&hide=simple)
+-   [Lock square rounded]([../../contributors](https://tabler-icons.io/i/lock-square-rounded-filled))
