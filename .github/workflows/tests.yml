@@ -53,4 +53,4 @@ jobs:
           composer update --${{ matrix.dependency-version }} --prefer-dist --no-interaction --no-suggest
 
       - name: Execute tests
-        run: vendor/bin/pest --colors=always
+        run: vendor/bin/phpunit --colors=always
