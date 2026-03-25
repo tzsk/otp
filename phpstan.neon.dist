@@ -1,0 +1,16 @@
+includes:
+    - vendor/larastan/larastan/extension.neon
+
+parameters:
+    paths:
+        - src
+        - config
+
+    level: 8
+
+    ignoreErrors:
+        # Ignore errors that may not be solvable or are false positives if they show up,
+        # otherwise leave empty.
+
+    excludePaths:
+        # Ignore files that shouldn't be analyzed.
