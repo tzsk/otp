@@ -31,7 +31,7 @@ class Otp
         return time();
     }
 
-    public function expiry($expiry): self
+    public function expiry(int|string $expiry): self
     {
         $seconds = (int) $expiry * 60;
 
@@ -42,7 +42,7 @@ class Otp
         return $this;
     }
 
-    public function digits($digits): self
+    public function digits(int|string $digits): self
     {
         $intDigits = (int) $digits;
 
@@ -53,19 +53,20 @@ class Otp
         return $this;
     }
 
-    public function generate($key): string
+    public function generate(string $key): string
     {
         $secret = sha1(uniqid());
         $expiry = $this->expiry;
+        /** @var DateInterval $ttl */
         $ttl = DateInterval::createFromDateString("{$expiry} seconds");
         $this->store->put($this->keyFor($key), $secret, $ttl);
 
         return $this->calculate($secret);
     }
 
-    public function check($code, $key): bool
+    public function check(mixed $code, string $key): bool
     {
-        $secret = $this->store->get($this->keyFor($key));
+        $secret = (string) $this->store->get($this->keyFor($key));
         if (empty($secret)) {
             return false;
         }
@@ -79,17 +80,17 @@ class Otp
         return $code == $this->calculate($secret, $factor);
     }
 
-    public function forget($key): bool
+    public function forget(string $key): bool
     {
         return $this->store->forget($this->keyFor($key));
     }
 
-    protected function keyFor($key): string
+    protected function keyFor(string $key): string
     {
         return md5(sprintf('%s-%s', 'tzsk-otp', $key));
     }
 
-    protected function calculate($secret, $factor = null): string
+    protected function calculate(string $secret, ?float $factor = null): string
     {
         $hash = hash_hmac('sha1', $this->timeFactor($factor), $secret, true);
         $offset = ord($hash[strlen($hash) - 1]) & 0xF;
@@ -106,9 +107,9 @@ class Otp
         return str_pad((string) $otp, $this->digits, '0', STR_PAD_LEFT);
     }
 
-    protected function timeFactor($divisionFactor): string
+    protected function timeFactor(?float $divisionFactor): string
     {
-        $factor = $divisionFactor ? floor($divisionFactor) : floor($this->getFreshTime() / $this->expiry);
+        $factor = (int) ($divisionFactor ? floor($divisionFactor) : floor($this->getFreshTime() / $this->expiry));
 
         $text = [];
         for ($i = 7; $i >= 0; $i--) {
@@ -123,7 +124,7 @@ class Otp
         return implode('', $text);
     }
 
-    protected function alias($key): ?Closure
+    protected function alias(string $key): ?Closure
     {
         $aliases = [
             'make' => fn (array $args) => $this->generate(...$args),
@@ -135,7 +136,10 @@ class Otp
         return data_get($aliases, $key);
     }
 
-    public function __call($method, $args)
+    /**
+     * @param  array<int, mixed>  $args
+     */
+    public function __call(string $method, array $args): mixed
     {
         $alias = $this->alias($method);
         if ($alias) {

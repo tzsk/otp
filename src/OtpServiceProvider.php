@@ -8,7 +8,7 @@ use Tzsk\Otp\Commands\OtpPublishCommand;
 
 class OtpServiceProvider extends ServiceProvider
 {
-    public function boot()
+    public function boot(): void
     {
         if ($this->app->runningInConsole()) {
             $this->publishes([
@@ -27,7 +27,7 @@ class OtpServiceProvider extends ServiceProvider
         });
     }
 
-    public function register()
+    public function register(): void
     {
         $this->mergeConfigFrom(__DIR__.'/../config/otp.php', 'otp');
     }

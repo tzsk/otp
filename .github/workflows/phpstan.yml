@@ -1,22 +1,22 @@
-name: Psalm
+name: PHPStan
 
 on: [push, pull_request]
 
 jobs:
-  Psalm:
-    name: Psalm
+  PHPStan:
+    name: PHPStan
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
 
       - name: Setup PHP
         uses: shivammathur/setup-php@v2
         with:
-          php-version: "8.2"
+          php-version: "8.4"
           coverage: none
 
       - name: Cache composer dependencies
-        uses: actions/cache@v2
+        uses: actions/cache@v4
         with:
           path: vendor
           key: composer-${{ hashFiles('composer.lock') }}
@@ -24,5 +24,5 @@ jobs:
       - name: Run composer install
         run: composer install -n --prefer-dist
 
-      - name: Run psalm
-        run: ./vendor/bin/psalm
+      - name: Run phpstan
+        run: ./vendor/bin/phpstan analyse

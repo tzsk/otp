@@ -10,8 +10,10 @@ class OtpPublishCommand extends Command
 
     public $description = 'Publish OTP config file';
 
-    public function handle()
+    public function handle(): int
     {
         $this->call('vendor:publish', ['--tag' => 'otp-config']);
+
+        return self::SUCCESS;
     }
 }
