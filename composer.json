@@ -1,13 +1,18 @@
 {
     "name": "tzsk/otp",
-    "description": "OTP Generator and Verifier without database",
+    "description": "A secure, database-free One-Time Password (OTP) generator and verifier for PHP and Laravel.",
     "keywords": [
         "tzsk",
         "otp",
+        "php",
+        "laravel",
         "php otp",
         "laravel otp",
         "otp generator",
-        "otp verification"
+        "otp verification",
+        "two-factor authentication",
+        "2fa",
+        "security"
     ],
     "homepage": "https://github.com/tzsk/otp",
     "license": "MIT",
