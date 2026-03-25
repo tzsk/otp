@@ -14,7 +14,7 @@ class MockOtp extends Otp
     public function __construct()
     {
         $directory = './tests/phpunit-cache';
-        $store = new Repository(new FileStore(new Filesystem, $directory));
+        $store = new Repository(new FileStore(new Filesystem(), $directory));
 
         parent::__construct($store);
     }

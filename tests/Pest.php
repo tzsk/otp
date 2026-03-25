@@ -1,7 +1,5 @@
 <?php
 
-use Tzsk\Otp\Tests\TestCase;
-
 /*
 |--------------------------------------------------------------------------
 | Test Case
@@ -13,7 +11,7 @@ use Tzsk\Otp\Tests\TestCase;
 |
 */
 
-pest()->extend(TestCase::class)->in(__DIR__);
+pest()->extend(Tzsk\Otp\Tests\TestCase::class)->in(__DIR__);
 
 /*
 |--------------------------------------------------------------------------

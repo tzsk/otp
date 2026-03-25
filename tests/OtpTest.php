@@ -4,34 +4,34 @@ use Tzsk\Otp\Facades\Otp;
 use Tzsk\Otp\Tests\MockOtp;
 
 it('has digits and expiry', function () {
-    $manager = new MockOtp;
+    $manager = new MockOtp();
 
     expect($manager->getExpiry())->toBeGreaterThan(0)
         ->and($manager->getDigits())->toBeGreaterThan(0);
 });
 
 it('can change digits', function () {
-    $manager = new MockOtp;
+    $manager = new MockOtp();
     $manager->digits(6);
 
-    $another = (new MockOtp)->digits(8);
+    $another = (new MockOtp())->digits(8);
 
     expect($manager->getDigits())->toBe(6)
         ->and($another->getDigits())->toBe(8);
 });
 
 it('can change expiry', function () {
-    $manager = new MockOtp;
+    $manager = new MockOtp();
     $manager->expiry(5);
 
-    $another = (new MockOtp)->expiry(6);
+    $another = (new MockOtp())->expiry(6);
 
     expect($manager->getExpiry())->toBe(300)
         ->and($another->getExpiry())->toBe(360);
 });
 
 it('can generate otp', function () {
-    $manager = new MockOtp;
+    $manager = new MockOtp();
 
     expect($manager->generate('foo'))->not->toBeEmpty()
         ->and($manager->make('foo'))->not->toBeEmpty()
@@ -44,7 +44,7 @@ it('can generate otp', function () {
 });
 
 it('will generate different otp each time', function () {
-    $manager = new MockOtp;
+    $manager = new MockOtp();
     expect($manager->make('foo'))->not->toBe($manager->make('foo'));
 
     expect(Otp::make('bar'))->not->toBe(Otp::make('bar'));
@@ -52,7 +52,7 @@ it('will generate different otp each time', function () {
 });
 
 it('generates the same number of digits', function () {
-    $manager = (new MockOtp)->digits(8);
+    $manager = (new MockOtp())->digits(8);
 
     expect(strlen((string) $manager->generate('foo')))->toBe(8);
 
@@ -61,7 +61,7 @@ it('generates the same number of digits', function () {
 });
 
 it('validates the otp', function () {
-    $manager = new MockOtp;
+    $manager = new MockOtp();
     $otp = $manager->generate('bar');
 
     expect($manager->check($otp, 'foo'))->toBeFalse()
@@ -73,7 +73,7 @@ it('validates the otp', function () {
 });
 
 it('can forget the otp', function () {
-    $manager = new MockOtp;
+    $manager = new MockOtp();
     $otp = $manager->generate('bar');
 
     expect($manager->check($otp, 'foo'))->toBeFalse()
@@ -84,7 +84,7 @@ it('can forget the otp', function () {
 });
 
 it('will be invalid after the expiry', function () {
-    $manager = new MockOtp;
+    $manager = new MockOtp();
     $otp = $manager->generate('foo');
     $manager->setTestTime(time() + ($manager->getExpiry() * 100));
 
