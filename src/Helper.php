@@ -9,7 +9,7 @@ if (! function_exists('otp')) {
     function otp(?string $directory = null): Otp
     {
         if ($directory) {
-            $store = new Repository(new FileStore(new Filesystem(), $directory));
+            $store = new Repository(new FileStore(new Filesystem, $directory));
 
             return new Otp($store);
         }

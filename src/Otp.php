@@ -137,7 +137,7 @@ class Otp
     }
 
     /**
-     * @param array<int, mixed> $args
+     * @param  array<int, mixed>  $args
      */
     public function __call(string $method, array $args): mixed
     {
