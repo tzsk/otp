@@ -55,7 +55,7 @@ class Otp
 
     public function generate(string $key): string
     {
-        $secret = sha1(uniqid());
+        $secret = \Illuminate\Support\Str::random(40);
         $expiry = $this->expiry;
         /** @var DateInterval $ttl */
         $ttl = DateInterval::createFromDateString("{$expiry} seconds");
