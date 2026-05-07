@@ -6,6 +6,7 @@ use Closure;
 use DateInterval;
 use Exception;
 use Illuminate\Contracts\Cache\Repository;
+use Illuminate\Support\Str;
 
 /**
  * @method string make(string $key)
@@ -55,7 +56,7 @@ class Otp
 
     public function generate(string $key): string
     {
-        $secret = \Illuminate\Support\Str::random(40);
+        $secret = Str::random(40);
         $expiry = $this->expiry;
         /** @var DateInterval $ttl */
         $ttl = DateInterval::createFromDateString("{$expiry} seconds");
