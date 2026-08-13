@@ -67,20 +67,24 @@ it('validates the otp', function () {
     expect($manager->check($otp, 'foo'))->toBeFalse()
         ->and($manager->check($otp, 'bar'))->toBeTrue();
 
-    // I can validate multiple times
-    expect($manager->check($otp, 'bar'))->toBeTrue()
-        ->and($manager->check($otp, 'bar'))->toBeTrue();
+    // A validated OTP is single-use and cannot be replayed.
+    expect($manager->check($otp, 'bar'))->toBeFalse()
+        ->and($manager->check($otp, 'bar'))->toBeFalse();
 });
 
 it('accepts the code as string or integer but rejects type juggling', function () {
     $manager = new MockOtp;
+
+    // The genuine code validates as its exact string, then as an integer.
+    // A fresh code is used for each, since a validated OTP is now single-use.
     $otp = $manager->generate('bar');
+    expect($manager->check($otp, 'bar'))->toBeTrue();
 
-    // The genuine code validates as its exact string or as an integer.
-    expect($manager->check($otp, 'bar'))->toBeTrue()
-        ->and($manager->check((int) $otp, 'bar'))->toBeTrue();
+    $otp = $manager->generate('bar');
+    expect($manager->check((int) $otp, 'bar'))->toBeTrue();
 
-    // Non-string / non-int inputs can no longer masquerade as a valid code.
+    // With a live code present, non-string / non-int inputs cannot masquerade as valid.
+    $manager->generate('bar');
     expect($manager->check(true, 'bar'))->toBeFalse()
         ->and($manager->check(false, 'bar'))->toBeFalse()
         ->and($manager->check(null, 'bar'))->toBeFalse()

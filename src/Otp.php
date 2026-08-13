@@ -83,13 +83,15 @@ class Otp
 
         $code = str_pad($code, $this->digits, '0', STR_PAD_LEFT);
 
-        if (hash_equals($this->calculate($secret), $code)) {
+        $factor = ($this->getFreshTime() - floor($this->expiry / 2)) / $this->expiry;
+
+        if (hash_equals($this->calculate($secret), $code) || hash_equals($this->calculate($secret, $factor), $code)) {
+            $this->forget($key);
+
             return true;
         }
 
-        $factor = ($this->getFreshTime() - floor($this->expiry / 2)) / $this->expiry;
-
-        return hash_equals($this->calculate($secret, $factor), $code);
+        return false;
     }
 
     public function forget(string $key): bool
