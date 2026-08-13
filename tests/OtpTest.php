@@ -72,6 +72,22 @@ it('validates the otp', function () {
         ->and($manager->check($otp, 'bar'))->toBeTrue();
 });
 
+it('accepts the code as string or integer but rejects type juggling', function () {
+    $manager = new MockOtp;
+    $otp = $manager->generate('bar');
+
+    // The genuine code validates as its exact string or as an integer.
+    expect($manager->check($otp, 'bar'))->toBeTrue()
+        ->and($manager->check((int) $otp, 'bar'))->toBeTrue();
+
+    // Non-string / non-int inputs can no longer masquerade as a valid code.
+    expect($manager->check(true, 'bar'))->toBeFalse()
+        ->and($manager->check(false, 'bar'))->toBeFalse()
+        ->and($manager->check(null, 'bar'))->toBeFalse()
+        ->and($manager->check([], 'bar'))->toBeFalse()
+        ->and($manager->check('', 'bar'))->toBeFalse();
+});
+
 it('can forget the otp', function () {
     $manager = new MockOtp;
     $otp = $manager->generate('bar');

@@ -72,13 +72,24 @@ class Otp
             return false;
         }
 
-        if ($code == $this->calculate($secret)) {
+        if (! is_string($code) && ! is_int($code)) {
+            return false;
+        }
+
+        $code = (string) $code;
+        if ($code === '') {
+            return false;
+        }
+
+        $code = str_pad($code, $this->digits, '0', STR_PAD_LEFT);
+
+        if (hash_equals($this->calculate($secret), $code)) {
             return true;
         }
 
         $factor = ($this->getFreshTime() - floor($this->expiry / 2)) / $this->expiry;
 
-        return $code == $this->calculate($secret, $factor);
+        return hash_equals($this->calculate($secret, $factor), $code);
     }
 
     public function forget(string $key): bool
